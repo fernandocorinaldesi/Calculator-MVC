@@ -9,8 +9,9 @@ public interface View {
 	
 	public void setText(String s);
 	
-	public void showerror(String err);
+	public void showError(String err);
 	
+		
 	public void open();
 
 }

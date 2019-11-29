@@ -220,10 +220,11 @@ public class NormalView extends JFrame implements View {
 	}
 
 	@Override
-	public void showerror(String err) {
+	public void showError(String err) {
 		// TODO Auto-generated method stub
 		JOptionPane.showMessageDialog(this, err);
 
 	}
 
+	
 }
