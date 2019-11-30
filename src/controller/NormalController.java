@@ -54,7 +54,6 @@ public class NormalController implements Controller {
 
 	public boolean esDouble(String s) {
 		try {
-
 			Double.parseDouble(s);
 			return true;
 
