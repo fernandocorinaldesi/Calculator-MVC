@@ -2,6 +2,7 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,9 +19,7 @@ import controller.Controller;
 public class NormalView extends JFrame implements View {
 
 	private static final long serialVersionUID = 1L;
-	private JPanel contenedor_botones;
-	private JPanel contenedor_botones2;
-	private JPanel contenedor_resultado;
+
 	private JButton uno;
 	private JButton dos;
 	private JButton tres;
@@ -32,51 +31,66 @@ public class NormalView extends JFrame implements View {
 	private JButton nueve;
 	private JButton mas;
 	private JButton menos;
+	private JButton dividir;
+	private JButton multi;
 	private JButton igual;
 	private JButton borrar;
+	private JButton coma;
+	private JButton cero;
+	private JButton dcero;
 	private JTextField resultado;
 	private String num;
 
 	public NormalView() {
 		super("CALCULADORA");
-		setSize(300, 250);
+		setSize(300, 370);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		construirCentro();
-		construirEste();
-		construirNorte();
+		add(construirNorte(), BorderLayout.NORTH);
+		add(construirEste(), BorderLayout.EAST);
+		add(construirCentro(), BorderLayout.CENTER);
 		ButtonListener();
+
 	}
 
-	public void construirNorte() {
-		contenedor_resultado = new JPanel();
+	private JPanel construirNorte() {
+		JPanel pane = new JPanel();
+		Font f = new Font("Sanserif", Font.BOLD, 24);
 		resultado = new JTextField();
-		resultado.setColumns(20);
-		contenedor_resultado.add(resultado);
-		contenedor_resultado.setBackground(Color.GRAY);
-		add(contenedor_resultado, BorderLayout.NORTH);
+		resultado.setEditable(false);
+		resultado.setColumns(12);
+		resultado.setFont(f);
+		pane.add(resultado);
+		pane.setBackground(new Color(130, 191, 227));
+
+		return pane;
 
 	}
 
-	public void construirEste() {
-		contenedor_botones2 = new JPanel();
-		contenedor_botones2.setBackground(Color.black);
+	private JPanel construirEste() {
+		JPanel pane = new JPanel();
+		pane.setBackground(new Color(69, 159, 214));
 		mas = new JButton("+");
 		menos = new JButton("-");
+		multi = new JButton("*");
+		dividir = new JButton("/");
 		igual = new JButton("=");
 		borrar = new JButton("borrar");
-		contenedor_botones2.add(mas);
-		contenedor_botones2.add(menos);
-		contenedor_botones2.add(igual);
-		contenedor_botones2.add(borrar);
-		contenedor_botones2.setLayout(new GridLayout(4, 1, 3, 3));
-		contenedor_botones2.setBorder(new EmptyBorder(5, 5, 5, 5));
-		add(contenedor_botones2, BorderLayout.EAST);
+		pane.add(mas);
+		pane.add(menos);
+		pane.add(multi);
+		pane.add(dividir);
+		pane.add(igual);
+		pane.add(borrar);
+		pane.setLayout(new GridLayout(6, 1, 3, 3));
+		pane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		return pane;
 
 	}
 
-	public void construirCentro() {
-		contenedor_botones = new JPanel();
-		contenedor_botones.setBackground(Color.blue);
+	private JPanel construirCentro() {
+		JPanel pane = new JPanel();
+		pane.setBackground(new Color(71, 71, 224));
+
 		uno = new JButton("1");
 		dos = new JButton("2");
 		tres = new JButton("3");
@@ -86,19 +100,25 @@ public class NormalView extends JFrame implements View {
 		siete = new JButton("7");
 		ocho = new JButton("8");
 		nueve = new JButton("9");
+		cero = new JButton("0");
+		dcero = new JButton("00");
+		coma = new JButton(".");
 
-		contenedor_botones.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contenedor_botones.setLayout(new GridLayout(3, 3, 3, 3));
-		contenedor_botones.add(uno);
-		contenedor_botones.add(dos);
-		contenedor_botones.add(tres);
-		contenedor_botones.add(cuatro);
-		contenedor_botones.add(cinco);
-		contenedor_botones.add(seis);
-		contenedor_botones.add(siete);
-		contenedor_botones.add(ocho);
-		contenedor_botones.add(nueve);
-		add(contenedor_botones, BorderLayout.CENTER);
+		pane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		pane.setLayout(new GridLayout(4, 3, 3, 3));
+		pane.add(uno);
+		pane.add(dos);
+		pane.add(tres);
+		pane.add(cuatro);
+		pane.add(cinco);
+		pane.add(seis);
+		pane.add(siete);
+		pane.add(ocho);
+		pane.add(nueve);
+		pane.add(cero);
+		pane.add(dcero);
+		pane.add(coma);
+		return pane;
 
 	}
 
@@ -167,6 +187,27 @@ public class NormalView extends JFrame implements View {
 
 			}
 		});
+		cero.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				num = resultado.getText() + cero.getText();
+				resultado.setText(num);
+
+			}
+		});
+		dcero.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				num = resultado.getText() + cero.getText() + cero.getText();
+				resultado.setText(num);
+
+			}
+		});
+		coma.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				num = resultado.getText() + coma.getText();
+				resultado.setText(num);
+
+			}
+		});
 		mas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				num = resultado.getText() + mas.getText();
@@ -177,6 +218,20 @@ public class NormalView extends JFrame implements View {
 		menos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				num = resultado.getText() + menos.getText();
+				resultado.setText(num);
+
+			}
+		});
+		multi.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				num = resultado.getText() + multi.getText();
+				resultado.setText(num);
+
+			}
+		});
+		dividir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				num = resultado.getText() + dividir.getText();
 				resultado.setText(num);
 
 			}
@@ -194,6 +249,7 @@ public class NormalView extends JFrame implements View {
 	public void open() {
 		setVisible(true);
 		setLocationRelativeTo(null);
+		setResizable(false);
 	}
 
 	@Override
@@ -226,5 +282,4 @@ public class NormalView extends JFrame implements View {
 
 	}
 
-	
 }
