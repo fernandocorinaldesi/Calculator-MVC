@@ -2,9 +2,9 @@
 
 ### Description
 
-A simple calculator using MVC pattern .
+Una simple calculadora hecha con el patron MVC .
 
-### Technologies
+### Tecnologias
 * JavaSE8
 * Swing
 
